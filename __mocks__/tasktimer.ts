@@ -1,10 +1,7 @@
-console.log('crazy  ioooiooi')
 export class TaskTimer {
   time: number;
   scheduler: Record<string, any> = []
   constructor(time: number) {
-    console.log('omo as if e reach here')
-    // throw new Error()
     this.time = time
   }
 

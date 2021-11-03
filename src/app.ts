@@ -3,8 +3,6 @@ import express, { Request, Response, NextFunction } from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import cors from 'cors'
-// import cron from 'node-cron'
-// import { TaskTimer } from 'tasktimer'
 import indexRouter from './routes/index'
 
 const app = express()
@@ -15,22 +13,6 @@ app.use(logger(loggerEnv))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-
-// const task = cron.schedule('*/10 * * * * *', () => {
-//   console.log('running every minute 1 and 2')
-// })
-
-// task.start()
-// const t = new Date()
-// console.log(t)
-// t.setSeconds(t.getSeconds() + 10)
-// console.log(t)
-
-// cron.schedule(`${t.toLocaleString()}`, () =>  {
-//   console.log('stopped task')
-// }, {
-//   scheduled: false
-// })
 
 app.use('/', indexRouter)
 

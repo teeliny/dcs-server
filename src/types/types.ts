@@ -19,25 +19,6 @@ export interface getQueryData {
 	acronyms: Record<string, any>
 }
 
-export interface findQuery {
-	name: { $regex: string; $options: 'i' }
-}
-
-export interface Query {
-	filter: {
-		name?: findQuery | string
-		acronymId?: string
-		description?: string
-        _id?: string
-	}
-	update: { name?: string; description?: string }
-	option: { upsert?: boolean; new?: boolean }
-}
-
-export interface mongoFind {
-	name: findQuery | string
-}
-
 export enum ErrorTypes {
 	'E400' = 'Bad Request',
 	'E401' = 'Unauthorized',

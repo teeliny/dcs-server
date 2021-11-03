@@ -9,7 +9,6 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@types/node-cron": "^3.0.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "^4.3.2",
@@ -20,7 +19,6 @@
     "jade": "~1.11.0",
     "jest": "^27.0.6",
     "morgan": "~1.9.1",
-    "node-cron": "^3.0.0",
     "tasktimer": "^3.0.0"
   },
   "devDependencies": {

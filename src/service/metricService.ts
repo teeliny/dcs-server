@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import FileHandling from '../helpers/fileHandlers'
 import ComputeHandlers from '../helpers/computeHandlers'
-import scheduleTask from '../helpers/scheduleTask'
+import scheduleHandler from '../helpers/scheduleHandler'
 
 const stage = process.env.NODE_ENV
  const relativePath =
@@ -44,7 +44,7 @@ export default class MetricService {
 			storedData.push(newMetric)
 			
 			FileHandling.writeDataToFile(filePath, storedData)
-			scheduleTask(metric)
+			scheduleHandler(metric)
 		}
 
 		// Check if metric exist but no active window
@@ -58,7 +58,7 @@ export default class MetricService {
 				value,
 			}
 			FileHandling.writeDataToFile(filePath, storedData)
-			scheduleTask(metric)
+			scheduleHandler(metric)
 		}
 
 		else {

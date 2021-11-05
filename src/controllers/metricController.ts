@@ -2,9 +2,12 @@ import { Request, Response } from 'express'
 import MetricService from '../service/metricService'
 import ErrorResponseHandler from '../helpers/errorhandlers'
 import { customStatus } from '../types/types'
-// import { signJWTToken } from '../helpers/jwt'
 
-export default class AcronymController {
+export default class MetricController {
+	public static baseController(_req: Request, res: Response) {
+		res.status(customStatus.OK).json({ message: 'Welcome to the base URL of applicant - bej202110' })
+	}
+
 	public static fetchMetric(req: Request, res: Response) {
 		const { metric } = req.params as {
 			metric: string

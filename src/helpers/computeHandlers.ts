@@ -23,7 +23,7 @@ export default class ComputeHandlers {
 			(firstValue: number, secondValue: number) => firstValue + secondValue,
 			0,
 		)
-		const average = sumValues / input.length
+		const average = +((sumValues / input.length).toFixed(2))
 		return average
   }
 }

@@ -22,8 +22,10 @@ afterAll(async () => {
 
 describe('Testing Acronym service implementation', () => {
 	test('Metric service that it can create new metric', async () => {
-		await MetricService.createMetric(metric, Math.floor(Math.random() * 100))
-		await MetricService.createMetric(metric, Math.floor(Math.random() * 100))
+		await Promise.all([
+			MetricService.createMetric(metric, Math.floor(Math.random() * 100)),
+			MetricService.createMetric(metric, Math.floor(Math.random() * 100))
+		])
 		const filePath = path.join(__dirname, '../../dataFile/testFile.json')
 		const storedData = await FileHandlers.readDataFile(filePath)
 		const filteredData = storedData.filter((singleData: { name: string }) => singleData.name === metric)
@@ -33,7 +35,6 @@ describe('Testing Acronym service implementation', () => {
 
 	test('Metric service can obtain the metric average', async () => {
 		const data = await MetricService.getMetric(metric)
-		console.log(data)
 		expect(data).toBeGreaterThan(0)
 	})
 
@@ -48,5 +49,6 @@ describe('Testing Acronym service implementation', () => {
 		const laterLength = deletedMetric.average.length
 		expect(deletedMetric).toHaveProperty('average')
 		expect(initialLength).toBeGreaterThanOrEqual(laterLength)
+		expect(laterLength).toBe(0)
 	})
 })

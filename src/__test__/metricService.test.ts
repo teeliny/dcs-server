@@ -21,7 +21,7 @@ afterAll(async () => {
 describe('Testing Acronym service implementation', () => {
 	test('Obtain base url', async () => {
 		const data = MetricService.baseAppUrl()
-		expect(data).toContain('bej202110')
+		expect(data).toContain('BEJ202110')
 	})
 
 	test('Metric service that it can create new metric', async () => {

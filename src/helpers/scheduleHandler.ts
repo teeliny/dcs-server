@@ -1,15 +1,10 @@
-import path from 'path'
 import { TaskTimer } from 'tasktimer'
 import FileHandlers from './fileHandlers'
 import ComputeHandlers from './computeHandlers'
 
 
 function taskSchedule(metric: string) {
-	// Check the environment to be able to set the correct file path for testing
-  const filePath =
-		process.env.NODE_ENV === 'test'
-			? path.join(__dirname, '../../dataFile/testFile.json')
-			: path.join(__dirname, '../../dataFile/metric.json')
+	const filePath = FileHandlers.getFilePath()
 
 	// Get the window duration in environment variable and convert to seconds
   const envDuration = process.env.WINDOW_DURATION as string

@@ -1,19 +1,15 @@
 import fs from 'fs'
-import path from 'path'
-import FileHandling from '../helpers/fileHandlers'
+import FileHandlers from '../helpers/fileHandlers'
 import ComputeHandlers from '../helpers/computeHandlers'
 import scheduleHandler from '../helpers/scheduleHandler'
 
-const stage = process.env.NODE_ENV
- const relativePath =
-		stage === 'test'
-			? '../../dataFile/testFile.json'
-			: '../../dataFile/metric.json'
-
-const filePath = path.join(__dirname, relativePath)
-
 export default class MetricService {
+	public static baseAppUrl() {
+		return 'Welcome to the base URL of applicant - bej202110'
+	}
+
 	public static async getMetric(metric: string) {
+		const filePath = FileHandlers.getFilePath()
 		const rawData = fs.readFileSync(filePath, 'utf8')
 		const storedData = JSON.parse(rawData)
 
@@ -21,11 +17,15 @@ export default class MetricService {
 			(singleData: { name: string }) =>
 				singleData.name === metric.toLowerCase(),
 		)
+		if (result.length === 0) {
+			throw new Error(`No metric with name '${metric}' in the storage`)
+		}
 		const median = ComputeHandlers.getMedian(result[0].average)
 		return median
 	}
 
 	public static async createMetric(metric: string, inputValue: number) {
+		const filePath = FileHandlers.getFilePath()
 		const rawData = fs.readFileSync(filePath, 'utf8')
 		const storedData = JSON.parse(rawData)
 		// Find if the metric exist
@@ -43,7 +43,7 @@ export default class MetricService {
 			}
 			storedData.push(newMetric)
 			
-			FileHandling.writeDataToFile(filePath, storedData)
+			FileHandlers.writeDataToFile(filePath, storedData)
 			scheduleHandler(metric)
 		}
 
@@ -57,7 +57,7 @@ export default class MetricService {
 				active,
 				value,
 			}
-			FileHandling.writeDataToFile(filePath, storedData)
+			FileHandlers.writeDataToFile(filePath, storedData)
 			scheduleHandler(metric)
 		}
 
@@ -69,12 +69,13 @@ export default class MetricService {
 				...storedData[index],
 				value,
 			}
-			FileHandling.writeDataToFile(filePath, storedData)
+			FileHandlers.writeDataToFile(filePath, storedData)
 		}
 	
 	}
 
 	public static async deleteMetric(metric: string) {
+		const filePath = FileHandlers.getFilePath()
 		const rawData = fs.readFileSync(filePath, 'utf8')
 		const storedData = JSON.parse(rawData)
 		const index = storedData.findIndex(
@@ -82,7 +83,7 @@ export default class MetricService {
 				singleData.name === metric.toLowerCase(),
 		)
 		storedData[index] = { ...storedData[index], average: [] }
-		FileHandling.writeDataToFile(filePath, storedData)
+		FileHandlers.writeDataToFile(filePath, storedData)
 		return storedData[index]
 	}
 }

@@ -5,7 +5,8 @@ import { customStatus } from '../types/types'
 
 export default class MetricController {
 	public static baseController(_req: Request, res: Response) {
-		res.status(customStatus.OK).json({ message: 'Welcome to the base URL of applicant - bej202110' })
+		const responseString = MetricService.baseAppUrl()
+		res.status(customStatus.OK).json({ message: responseString })
 	}
 
 	public static fetchMetric(req: Request, res: Response) {

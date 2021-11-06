@@ -5,7 +5,7 @@ import scheduleHandler from '../helpers/scheduleHandler'
 
 export default class MetricService {
 	public static baseAppUrl() {
-		return 'Welcome to the base URL of applicant - bej202110'
+		return 'Welcome to the base URL of applicant - BEJ202110'
 	}
 
 	public static async getMetric(metric: string) {

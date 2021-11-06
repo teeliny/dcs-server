@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "start": "tsc &&  node ./bin/www",
-    "dev": "node ./bin/www",
-    "test": "jest",
-    "tsc": "tsc"
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

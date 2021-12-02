@@ -20,15 +20,19 @@ const swaggerDefinition = {
 	},
 	servers: [
 		{
+			url: 'https://dcs-bej202110.herokuapp.com',
+			description: 'Production Env',
+		},
+		{
 			url: 'http://localhost:3008',
 			description: 'Local server',
 		},
-		{
-			url: 'https://educode-server.herokuapp.com',
-			description: 'DEV Env',
-		},
 	],
 	tags: [
+		{
+			name: 'Base',
+			description: 'The base API that describe the application',
+		},
 		{
 			name: 'Metric',
 			description: 'API for post metric, delete current window and get median of the specified metric',

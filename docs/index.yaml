@@ -1,4 +1,18 @@
 paths:
+  /: 
+    get:
+      tags:
+        - Base
+      summary: Description of the application
+      responses:
+        200:
+          description: A string describing the app
+          content:
+            application/json:
+              schema:
+                example:
+                  message: Welcome to the base URL of applicant - BEJ202110
+
   /{metric}/median:
     get:
       tags:
@@ -39,6 +53,7 @@ paths:
                 example:
                   error: Not found
                   message: Bad URL string
+
   /{metric}:
     post:
       tags:
@@ -87,6 +102,7 @@ paths:
                 example:
                   error: Not found
                   message: Bad URL string
+
     delete:
       tags:
         - Metric

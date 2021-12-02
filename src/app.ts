@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import cors from 'cors'
 import indexRouter from './routes/index'
+import swaggerUi from 'swagger-ui-express'
+import { swaggerSpec } from './swagger'
 
 const app = express()
 const environment = process.env.NODE_ENV || 'development'
@@ -14,6 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use('/', indexRouter)
 
 // catch 404 and forward to error handler

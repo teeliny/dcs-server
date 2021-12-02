@@ -1,0 +1,126 @@
+paths:
+  /{metric}/median:
+    get:
+      tags:
+        - Metric
+      summary: get the median of the current metric
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: metric
+          description: The metric that you want to fetch its median
+          required: true
+          schema:
+            type: string
+            example: student
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                example:
+                  median: 24.5
+                  message: data successfully fetched
+        400:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                example:
+                  error: Not found
+                  message: No metric with name 'student' in the storage
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                example:
+                  error: Not found
+                  message: Bad URL string
+  /{metric}:
+    post:
+      tags:
+        - Metric
+      summary: post a new data to hte current metric within the window time
+      parameters:
+        - in: path
+          name: metric
+          description: The metric that you want to add value to its current window storage
+          required: true
+          schema:
+            type: string
+            example: student
+      requestBody:
+        content:
+          application/json:
+            required:
+              - value
+            schema:
+              type: object
+              properties:
+                value:
+                  type: integer
+              example:
+                value: 15
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                example:
+        400:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                example:
+                  error: Not found
+                  message: empty request body
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                example:
+                  error: Not found
+                  message: Bad URL string
+    delete:
+      tags:
+        - Metric
+      summary: Delete the average array of the specified metric
+      parameters:
+        - in: path
+          name: metric
+          description: The metric that you want to delete from
+          required: true
+          schema:
+            type: string
+            example: student
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                example:
+                  message: student average have been cleared
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                example:
+                  error: Bad request
+                  message: Empty request params
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                example:
+                  error: Not found
+                  message: Metric not found
+

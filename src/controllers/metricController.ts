@@ -24,7 +24,7 @@ export default class MetricController {
 			.then((data) =>
 				res
 					.status(customStatus.OK)
-					.json({ data, message: 'data successfully fetched' }),
+					.json({ median: data, message: 'data successfully fetched' }),
 			)
 			.catch((error) => {
 				throw new ErrorResponseHandler(
